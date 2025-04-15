@@ -1,5 +1,5 @@
 # PROJECT SETUP
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.10)
 
 project(
   arm-teleop-direct
@@ -40,23 +40,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # INCLUDE DEPENDENCIES
 
-# public dependencies (which should propagate)
-set(THIS_PACKAGE_INCLUDE_DEPENDS rclcpp)
-# packages which must be present but aren't linked against
-set(THIS_PACKAGE_BUILD_DEPENDS backward_ros ament_cmake)
-
-foreach(Dependency IN ITEMS ${THIS_PACKAGE_BUILD_DEPENDS})
-  find_package(${Dependency} REQUIRED)
-endforeach()
-
-foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
-  find_package(${Dependency} REQUIRED)
-endforeach()
-
-# Find other required packages
+# Find required packages
 find_package(Boost REQUIRED COMPONENTS system)
 find_package(Curses REQUIRED)
 find_package(yaml-cpp REQUIRED)
+
+# Optional stack trace support (not ROS dependent)
+option(ENABLE_BACKWARD "Enable backward-cpp (stack traces)" OFF)
+if(ENABLE_BACKWARD)
+  # Try to find the backward-cpp package
+  find_package(Backward QUIET)
+  if(Backward_FOUND)
+    add_definitions(-DHAS_BACKWARD)
+    # Backward will handle adding necessary dependencies
+  else()
+    message(STATUS "Backward-cpp not found. Stack traces will be disabled.")
+  endif()
+endif()
 
 # COMPILE (Executables)
 
@@ -71,6 +71,11 @@ target_include_directories(
 # Link private dependencies
 target_link_libraries(${PROJECT_NAME} PRIVATE Boost::system ${CURSES_LIBRARIES}
                                               yaml-cpp pthread)
+
+# If backward was found, link it
+if(TARGET Backward::Backward)
+  target_link_libraries(${PROJECT_NAME} PRIVATE Backward::Backward)
+endif()
 
 # INSTALL (Executables)
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)

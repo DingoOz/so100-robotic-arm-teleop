@@ -31,9 +31,7 @@ This is still an active WIP but currently useful.
 
 ```
 mkdir build
-```
-
-```
+cd build
 cmake ..
 make
 ```
@@ -73,6 +71,21 @@ socat PTY,link=/home/dingo/leader_follower,raw,echo=0 TCP:192.168.1.15:7100
 ```
 
 Then run the application and the virtualised remote port should be detected automatically.
+
+## Optional: Stack Traces
+
+If you want stack traces enabled for better debugging, you can optionally install the backward-cpp library:
+
+1. Install dependencies:
+```
+sudo apt-get install libdw-dev
+```
+
+2. Build with stack traces enabled:
+```
+cmake -DENABLE_BACKWARD=ON ..
+make
+```
 
 ## TODO
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script to provide a fallback CMakeLists.txt for CI environments where ROS is not available
+# Script to provide a fallback CMakeLists.txt for CI environments
 
 set -e
 
@@ -9,7 +9,7 @@ if [ -z "$CI" ]; then
   exit 1
 fi
 
-echo "Creating fallback CMakeLists.txt without ROS dependencies..."
+echo "Creating fallback CMakeLists.txt..."
 
 cat > CMakeLists.txt << 'EOF'
 # PROJECT SETUP
@@ -79,5 +79,5 @@ install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 EOF
 
-echo "Fallback CMakeLists.txt created. Use this only if the standard build fails due to missing ROS dependencies."
-echo "To use: cp CMakeLists.txt.ci CMakeLists.txt && mkdir -p build && cd build && cmake .. && make"
+echo "Fallback CMakeLists.txt created."
+echo "To use: mkdir -p build && cd build && cmake .. && make"
