@@ -9,6 +9,8 @@ slaves 6 Feetech ST3215 servos hence additional applications may be useful.
 It originally derived from a teleoperated robotic arm used on the robot
 Perseus-v2 which competed in the Australian Rover Challenge 2025. 
 
+![image](https://github.com/user-attachments/assets/7ac55ace-b064-4ba5-8872-921c4776c9af)
+
 # Background
 
 This is a terminal based application for teleoperating of the S0-100 arm.
