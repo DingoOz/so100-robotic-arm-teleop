@@ -1,6 +1,17 @@
-# perseus-arm-teleop
+# so100-arm-teleop
 
-Terminal based Arm Teleop for Perseus
+This is a stand alone C++ application that allows for teleoperation of a 
+leader / follower pair of SO-100 robotics arms. 
+
+It does not rely on the URDF or concept of the arm itself but merely 
+slaves 6 Feetech ST3215 servos hence additional applications may be useful.
+
+It originally derived from a teleoperated robotic arm used on the robot
+Perseus-v2 which competed in the Australian Rover Challenge 2025. 
+
+# Background
+
+This is a terminal based application for teleoperating of the S0-100 arm.
 
 By default this will connect two arms connected via serial ports on the one machine.
 
@@ -10,7 +21,11 @@ Calibration values for leader and follower arms can be saved to a .yaml file.
 
 Always make sure all servos are on the same baud rate. 1M baud is able to be handled.
 
-# Build
+This has only been tested on Ubuntu 22.04 and 24.04 systems running on Intel and Arm hardware.
+
+This is still an active WIP but currently useful.
+
+# Build Instructions
 
 ```
 mkdir build
