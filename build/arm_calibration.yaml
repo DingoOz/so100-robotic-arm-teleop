@@ -1,0 +1,55 @@
+timestamp: 2025-03-28_11-11-25
+arm1_port: /dev/ttyACM0
+arm2_port: /home/dingo/leader_follower
+arm1:
+  servos:
+    - id: 1
+      min: 1719
+      max: 3339
+      mirroring: false
+    - id: 2
+      min: 941
+      max: 2258
+      mirroring: false
+    - id: 3
+      min: 930
+      max: 3129
+      mirroring: false
+    - id: 4
+      min: 1080
+      max: 1932
+      mirroring: false
+    - id: 5
+      min: 2311
+      max: 3749
+      mirroring: false
+    - id: 6
+      min: 2346
+      max: 3465
+      mirroring: false
+arm2:
+  servos:
+    - id: 1
+      min: 2703
+      max: 3043
+      mirroring: true
+    - id: 2
+      min: 2153
+      max: 3905
+      mirroring: true
+    - id: 3
+      min: 166
+      max: 1978
+      mirroring: true
+    - id: 4
+      min: 939
+      max: 3260
+      mirroring: true
+    - id: 5
+      min: 1112
+      max: 2969
+      mirroring: true
+    - id: 6
+      min: 2969
+      max: 3839
+      mirroring: true
