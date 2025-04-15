@@ -1,0 +1,35 @@
+name: Build Application
+
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake g++ libboost-system-dev libncurses5-dev libyaml-cpp-dev
+
+    - name: Configure CMake
+      run: |
+        mkdir -p build
+        cd build
+        cmake ..
+
+    - name: Build
+      run: |
+        cd build
+        make -j$(nproc)
+    
+    - name: Test build artifacts
+      run: |
+        ls -la build/
+        test -f build/arm-teleop-direct
