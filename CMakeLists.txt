@@ -6,6 +6,12 @@ project(
   VERSION 1.0.0
   LANGUAGES CXX)
 
+# Add testing support to the project
+enable_testing()
+
+# Option to build tests
+option(BUILD_TESTS "Build test suite" OFF)
+
 # credit https://www.kitware.com/cmake-and-the-default-build-type/
 set(default_build_type "Debug")
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -81,3 +87,18 @@ endif()
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 # Versioning
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
+
+# Test configuration (only if BUILD_TESTS is ON)
+if(BUILD_TESTS)
+  # Add Catch2 (via FetchContent)
+  include(FetchContent)
+  FetchContent_Declare(
+    Catch2
+    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+    GIT_TAG v3.5.0 # Use the latest release
+  )
+  FetchContent_MakeAvailable(Catch2)
+  
+  # Create test directory
+  add_subdirectory(tests)
+endif()

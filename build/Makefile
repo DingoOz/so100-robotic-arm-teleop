@@ -65,6 +65,16 @@ CMAKE_BINARY_DIR = /home/dingo/Programming/so100-robotic-arm-teleop/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+.PHONY : test/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
@@ -174,6 +184,84 @@ arm-teleop-direct/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/arm-teleop-direct.dir/build.make CMakeFiles/arm-teleop-direct.dir/build
 .PHONY : arm-teleop-direct/fast
 
+#=============================================================================
+# Target rules for targets named Catch2
+
+# Build rule for target.
+Catch2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Catch2
+.PHONY : Catch2
+
+# fast build rule for target.
+Catch2/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/catch2-build/src/CMakeFiles/Catch2.dir/build.make _deps/catch2-build/src/CMakeFiles/Catch2.dir/build
+.PHONY : Catch2/fast
+
+#=============================================================================
+# Target rules for targets named Catch2WithMain
+
+# Build rule for target.
+Catch2WithMain: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Catch2WithMain
+.PHONY : Catch2WithMain
+
+# fast build rule for target.
+Catch2WithMain/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/catch2-build/src/CMakeFiles/Catch2WithMain.dir/build.make _deps/catch2-build/src/CMakeFiles/Catch2WithMain.dir/build
+.PHONY : Catch2WithMain/fast
+
+#=============================================================================
+# Target rules for targets named test_utils
+
+# Build rule for target.
+test_utils: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_utils
+.PHONY : test_utils
+
+# fast build rule for target.
+test_utils/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_utils.dir/build.make tests/CMakeFiles/test_utils.dir/build
+.PHONY : test_utils/fast
+
+#=============================================================================
+# Target rules for targets named test_main
+
+# Build rule for target.
+test_main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_main
+.PHONY : test_main
+
+# fast build rule for target.
+test_main/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_main.dir/build.make tests/CMakeFiles/test_main.dir/build
+.PHONY : test_main/fast
+
+#=============================================================================
+# Target rules for targets named test_st3215_servo_reader
+
+# Build rule for target.
+test_st3215_servo_reader: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_st3215_servo_reader
+.PHONY : test_st3215_servo_reader
+
+# fast build rule for target.
+test_st3215_servo_reader/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_st3215_servo_reader.dir/build.make tests/CMakeFiles/test_st3215_servo_reader.dir/build
+.PHONY : test_st3215_servo_reader/fast
+
+#=============================================================================
+# Target rules for targets named test_position_scaling
+
+# Build rule for target.
+test_position_scaling: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_position_scaling
+.PHONY : test_position_scaling
+
+# fast build rule for target.
+test_position_scaling/fast:
+	$(MAKE) $(MAKESILENT) -f tests/CMakeFiles/test_position_scaling.dir/build.make tests/CMakeFiles/test_position_scaling.dir/build
+.PHONY : test_position_scaling/fast
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -234,7 +322,14 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... test"
+	@echo "... Catch2"
+	@echo "... Catch2WithMain"
 	@echo "... arm-teleop-direct"
+	@echo "... test_main"
+	@echo "... test_position_scaling"
+	@echo "... test_st3215_servo_reader"
+	@echo "... test_utils"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

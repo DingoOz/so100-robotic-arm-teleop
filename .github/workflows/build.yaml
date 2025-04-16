@@ -34,13 +34,18 @@ jobs:
         mkdir -p build
         cd build
         
-        # Configure with clean state
-        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .. || (echo "CMake configuration failed"; cat CMakeFiles/CMakeError.log; exit 1)
+        # Configure with clean state and enable tests
+        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DBUILD_TESTS=ON .. || (echo "CMake configuration failed"; cat CMakeFiles/CMakeError.log; exit 1)
 
     - name: Build
       run: |
         cd build
         make -j$(nproc) VERBOSE=1 || (echo "Build failed"; exit 1)
+    
+    - name: Run tests
+      run: |
+        cd build
+        ctest --output-on-failure
     
     - name: Test build artifacts
       run: |

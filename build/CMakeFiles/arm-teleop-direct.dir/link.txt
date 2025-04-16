@@ -1,0 +1,1 @@
+/usr/bin/c++ -g "CMakeFiles/arm-teleop-direct.dir/src/main.cpp.o" "CMakeFiles/arm-teleop-direct.dir/src/perseus-arm-teleop.cpp.o" -o arm-teleop-direct-1.0.0  /usr/lib/x86_64-linux-gnu/libboost_system.so.1.83.0 -lcurses /usr/lib/x86_64-linux-gnu/libform.so -lyaml-cpp -lpthread 

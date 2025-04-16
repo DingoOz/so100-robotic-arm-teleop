@@ -1,0 +1,5 @@
+if(EXISTS "/home/dingo/Programming/so100-robotic-arm-teleop/build/tests/test_position_scaling-b12d07c_tests.cmake")
+  include("/home/dingo/Programming/so100-robotic-arm-teleop/build/tests/test_position_scaling-b12d07c_tests.cmake")
+else()
+  add_test(test_position_scaling_NOT_BUILT-b12d07c test_position_scaling_NOT_BUILT-b12d07c)
+endif()

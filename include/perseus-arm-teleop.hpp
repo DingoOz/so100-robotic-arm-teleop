@@ -68,7 +68,7 @@ public:
      */
     boost::asio::serial_port& getSerialPort() { return _serial_port; }
 
-private:
+protected:
     /**
      * @brief Creates a write command packet according to ST3215 protocol
      * @param id Servo ID
@@ -95,6 +95,8 @@ private:
      * @return Vector containing the complete command packet
      */
     std::vector<uint8_t> _createReadCommand(uint8_t id, uint8_t address, uint8_t size);
+
+private:
 
     boost::asio::io_service _io_service;
     boost::asio::serial_port _serial_port;
