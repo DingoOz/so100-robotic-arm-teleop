@@ -19,10 +19,10 @@ std::vector<uint8_t> createLoadResponse(uint8_t id, int16_t load, uint8_t error_
 // Calculates checksum for validating packets
 uint8_t calculateChecksum(const std::vector<uint8_t>& packet, size_t start_idx = 2);
 
-// Wraps a MockSerialPort in a shared_ptr with correct interface
-std::shared_ptr<boost::asio::serial_port> createMockSerialPort();
+// Creates a mock serial port for testing
+std::shared_ptr<MockSerialPort> createMockSerialPort();
 
-// Extract the embedded MockSerialPort from the shared_ptr
+// Retained for API compatibility - should not be used in tests
 MockSerialPort& getMockFromWrapper(std::shared_ptr<boost::asio::serial_port> wrapper);
 
 }

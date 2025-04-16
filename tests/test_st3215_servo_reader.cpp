@@ -23,7 +23,7 @@ public:
 };
 
 TEST_CASE("ST3215ServoReader Command Formation", "[st3215]") {
-    // Create a reader for testing
+    // Create a reader for testing - use a mock device path
     TestableServoReader reader("/dev/null", 115200);
     
     SECTION("Read command formation") {
@@ -58,7 +58,7 @@ TEST_CASE("ST3215ServoReader Command Formation", "[st3215]") {
         
         auto command = reader.createWriteCommand(servo_id, address, data);
         
-        REQUIRE(command.size() == 8); // Header(2) + ID(1) + Length(1) + Instruction(1) + Address(1) + Data(2) + Checksum(1)
+        REQUIRE(command.size() == 9); // Header(2) + ID(1) + Length(1) + Instruction(1) + Address(1) + Data(2) + Checksum(1)
         REQUIRE(command[0] == protocol::HEADER1);
         REQUIRE(command[1] == protocol::HEADER2);
         REQUIRE(command[2] == servo_id);
@@ -78,4 +78,10 @@ TEST_CASE("ST3215ServoReader Command Formation", "[st3215]") {
     }
 }
 
-// More tests would go here for other aspects of the ServoReader
+// Additional basic test to ensure the test infrastructure works
+TEST_CASE("ST3215ServoReader Basic Functionality", "[st3215][basic]") {
+    SECTION("Test can compile and run") {
+        // This is just a placeholder test to confirm the test infrastructure works
+        REQUIRE(true);
+    }
+}
