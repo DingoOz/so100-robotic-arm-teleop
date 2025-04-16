@@ -1,3 +1,29 @@
+# Build directories
+/build/
+/build-*/
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+Testing/
+_deps/
+*.cmake
+!CMakeLists.txt
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Generated test executables
+/tests/test_*
+!/tests/test_*.cpp
+!/tests/test_*.hpp
+
 # Prerequisites
 *.d
 
