@@ -1,27 +1,29 @@
+# This is an analysis of the current GitHub Actions workflow file
+
 name: Build Application
 
 on:
   push:
-    branches: [ '**' ]
+    branches: [ '**' ]  # Run on all branches
   pull_request:
-    branches: [ main ]
+    branches: [ main ]  # Run on PRs to main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Prevent CMake from using cached paths
+      # Prevent CMake from using cached paths - good practice for CI
       CMAKE_DISABLE_PRECOMPILE_HEADERS: ON
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v3  # Checks out the repository
     
     - name: Install dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y cmake g++ libboost-system-dev libncurses5-dev libyaml-cpp-dev
         
-        # Optional: Install backward-cpp for stack traces
+        # Optional: Install backward-cpp for stack traces (commented out currently)
         # sudo apt-get install -y libdw-dev
 
     - name: Clean and Configure CMake

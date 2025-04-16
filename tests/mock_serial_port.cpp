@@ -14,6 +14,7 @@ MockSerialPort::~MockSerialPort() {
 }
 
 void MockSerialPort::open(const std::string& device) {
+    (void)device; // Prevent unused parameter warning
     _is_open = true;
 }
 
@@ -75,7 +76,7 @@ size_t MockSerialPort::read_some(const boost::asio::mutable_buffer& buffer,
     size_t bytes_to_copy = std::min(buffer_size, data.size());
     
     uint8_t* buffer_data = boost::asio::buffer_cast<uint8_t*>(buffer);
-    std::copy(data.begin(), data.begin() + bytes_to_copy, buffer_data);
+    std::copy(data.begin(), data.begin() + static_cast<std::ptrdiff_t>(bytes_to_copy), buffer_data);
 
     ec = boost::system::error_code(); // Clear any error
     return bytes_to_copy;
